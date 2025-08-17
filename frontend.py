@@ -1,11 +1,11 @@
 import streamlit as st
+import sklearn
 import pandas as pd
 import pickle
 import os
 from datetime import datetime
 import sys
 import traceback
-
 
 
 st.write("Python version:", sys.version)
@@ -29,15 +29,9 @@ try:
         st.error(" No model file found. Please upload ur pickle file.")
 
 except Exception as e:
-    st.error(f"❌ Error loading model: {e}")
+    st.error(f" Error loading model: {e}")
     st.code(traceback.format_exc())
     rmodel = None
-
-
-
-
-
-
 
 
 with  st.container(border=True): 
@@ -61,7 +55,7 @@ with  st.container(border=True):
        if rmodel is None:
          st.error("Model is not loaded. Please upload the correct Random Forest pickle file.")
        else:
-        try:
+         try:
             
             feature_names = ['Make', 'Model', 'Year', 'Engine Size', 'Mileage', 'Fuel Type', 'Transmission', 'current_age']
             
@@ -72,6 +66,6 @@ with  st.container(border=True):
             
             out = rmodel.predict(input_df)
             st.subheader(f"Total_Price in Indian currency: {out[0] * 10}")
-        except Exception as e:
+         except Exception as e:
             st.error(f"Prediction failed: {e}")
  
